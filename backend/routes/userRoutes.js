@@ -10,18 +10,20 @@ import { authUser,
     deleteUser,
     updateUser } from '../controllers/userController.js';
 import checkObjectId from '../middleware/checkObjectId.js';
+import { protect, admin } from '../middleware/authMiddleware.js';
 
-router.route('/').post(registerUser).get(getUsers);
+
+router.route('/').post(registerUser).get(protect, admin, getUsers);
 router.post('/logout', logoutUser);
-router.post('/login',authUser);
+router.post('/auth',authUser);
 router
     .route('/profile')
-    .get(getUserProfile)
-    .put(updateUserProfile);
+    .get(protect, getUserProfile)
+    .put(protect, updateUserProfile);
 router
     .route('/:id')
-    .delete(checkObjectId, deleteUser)
-    .get(checkObjectId, getUserById)
-    .put(checkObjectId, updateUser);
+    .delete(protect, admin, checkObjectId, deleteUser)
+    .get(protect, admin, checkObjectId, getUserById)
+    .put(protect, admin, checkObjectId, updateUser);
 
 export default router;
