@@ -1,5 +1,5 @@
 import express from 'express';
-const router = express.Router();
+
 import { authUser,
     registerUser,
     logoutUser,
@@ -12,6 +12,7 @@ import { authUser,
 import checkObjectId from '../middleware/checkObjectId.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
+const router = express.Router();
 
 router.route('/').post(registerUser).get(protect, admin, getUsers);
 router.post('/logout', logoutUser);

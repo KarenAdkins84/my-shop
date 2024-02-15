@@ -14,7 +14,7 @@ import { clearCartItems } from '../slices/cartSlice';
 
 const PlaceOrderScreen = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    
     const cart = useSelector(state => state.cart);
 
     const [createOrder, { isLoading, error }] = useCreateOrderMutation();
@@ -27,6 +27,7 @@ const PlaceOrderScreen = () => {
         }
     }, [cart.paymentMethod, cart.shippingAddress.address, navigate]);
 
+    const dispatch = useDispatch();
     const placeOrderHandler = async () => {
         try {
             const res = await createOrder({

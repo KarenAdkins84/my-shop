@@ -5,21 +5,20 @@ import {
     Row, 
     Col, 
     ListGroup, 
-    Image, 
-    Form, 
+    Image,  
     Button, 
     Card 
 } from 'react-bootstrap';
-import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { 
     useGetOrderDetailsQuery, 
     usePayOrderMutation, 
     useGetPayPalClientIdQuery,
-    useCreateOrderMutation, 
+    useDeliverOrderMutation
 } from '../slices/ordersApiSlice';
 
 
@@ -35,6 +34,8 @@ const OrderScreen = () => {
     } = useGetOrderDetailsQuery(orderId);
 
     const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
+
+    const [deliverOrder, { isLoading: loadingDeliver}] = useDeliverOrderMutation();
 
     const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
@@ -73,16 +74,16 @@ const OrderScreen = () => {
                 refetch();
                 toast.success('Payment successful');
             } catch (err) {
-                toast.error(err?.data?.message || err.message);
+                toast.error(err?.data?.message || err.error);
             }
         });
     }
 
-    async function onApproveTest() { 
-        await payOrder({ orderId, details: { payer: {} } });
-                refetch();
-                toast.success('Payment successful');
-    }
+    // async function onApproveTest() { 
+    //     await payOrder({ orderId, details: { payer: {} } });
+    //             refetch();
+    //             toast.success('Payment successful');
+    // }
 
     function onError(err) { 
         toast.error(err.message);
@@ -104,10 +105,19 @@ const OrderScreen = () => {
             });
         }
 
+        const deliverOrderHandler = async () => {
+            try {
+                await deliverOrder(orderId);
+                refetch();
+            } catch (err) {
+                toast.error(err?.data?.message || err.message);
+            }
+        }
+
     return isLoading ? (
         <Loader />
     ) : error ? (
-        <Message variant='danger' /> 
+        <Message variant='danger'>{error.data.message}</Message> 
     ) : (
         <>
             <h1>Order {order._id}</h1>
@@ -117,10 +127,13 @@ const OrderScreen = () => {
                         <ListGroup.Item>
                             <h2>Shipping</h2>
                             <p>
-                                <strong>Name:</strong> {order.user.name}
+                                <strong>Name: </strong> {order.user.name}
                             </p>
                             <p>
-                                <strong>Email:</strong>{order.user.email}
+                                <strong>Email: </strong>{' '}
+                                <a href={`mailto:${order.user.email}`}>
+                                    {order.user.email}
+                                </a>
                                 
                             </p>
                             <p>
@@ -155,28 +168,34 @@ const OrderScreen = () => {
 
                         <ListGroup.Item>
                             <h2>Order Items</h2>
-                            { order.orderItems.map((item, index) => (
-                                <ListGroup.Item key={index}>
-                                    <Row>
-                                        <Col md={1}>
-                                            <Image
-                                                src={item.image}
-                                                alt={item.name}
-                                                fluid
-                                                rounded
-                                            />
-                                        </Col>
-                                        <Col>
-                                            <Link to={`/product/${item.product}`}>
-                                                {item.name}
-                                            </Link>
-                                        </Col>
-                                        <Col md={4}>
-                                            {item.qty} x ${item.price} = ${item.qty * item.price}
-                                        </Col>
-                                    </Row>
-                                </ListGroup.Item>
-                            ))}
+                            {order.orderItems.length === 0 ? (
+                                <Message>Your order is empty</Message>
+                            ) : (
+                                <ListGroup variant='flush'>
+                                    {order.orderItems.map((item, index) => (
+                                        <ListGroup.Item key={index}>
+                                            <Row>
+                                                <Col md={1}>
+                                                    <Image
+                                                        src={item.image}
+                                                        alt={item.name}
+                                                        fluid
+                                                        rounded
+                                                    />
+                                                </Col>
+                                                <Col>
+                                                    <Link to={`/product/${item.product}`}>
+                                                        {item.name}
+                                                    </Link>
+                                                </Col>
+                                                <Col md={4}>
+                                                    {item.qty} x ${item.price} = ${item.qty * item.price}
+                                                </Col>
+                                            </Row>
+                                        </ListGroup.Item>
+                                    ))}
+                                </ListGroup>
+                            )}
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
@@ -211,12 +230,12 @@ const OrderScreen = () => {
 
                                     {isPending ? <Loader /> : (
                                         <div>
-                                            <Button 
+                                            {/* <Button 
                                             onClick={onApproveTest}
                                             style={{marginBottom: '10px'}}
                                             >
                                                 Test Pay Order
-                                                </Button>
+                                                </Button> */}
                                                 <div>
                                                     <PayPalButtons 
                                                         createOrder={createOrder}
@@ -228,7 +247,17 @@ const OrderScreen = () => {
                                     )}
                                 </ListGroup.Item>
                             )}
-                            {/* MARK AS DELIVERED PLACEORDER */}
+                            {loadingDeliver && <Loader />}
+
+                            {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                                <ListGroup.Item>
+                                    <Button type='button' 
+                                    className='btn btn-block' 
+                                    onClick={deliverOrderHandler}
+                                    >Mark As Delivered
+                                    </Button>
+                                </ListGroup.Item>
+                            )}
                         </ListGroup>
                     </Card>
                 </Col>
