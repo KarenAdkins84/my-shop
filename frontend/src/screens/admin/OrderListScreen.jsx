@@ -9,8 +9,9 @@ import { useGetOrdersQuery } from '../../slices/ordersApiSlice';
 
 const OrderListScreen = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
-  
-  return <>
+  console.log(orders);
+  return (
+    <>
     <h1>Orders</h1>
     {isLoading ? ( 
       <Loader /> 
@@ -65,6 +66,7 @@ const OrderListScreen = () => {
       </Table>
     )}
   </>
+  );
 };
 
 export default OrderListScreen;

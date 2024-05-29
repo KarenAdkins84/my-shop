@@ -44,7 +44,7 @@ const PlaceOrderScreen = () => {
         } catch (error) {
             toast.error(error);
         }
-    }
+    };
 
   return <>
     <CheckoutSteps step1 step2 step3 step4 />
@@ -65,6 +65,7 @@ const PlaceOrderScreen = () => {
                     <strong>Method: </strong>
                     {cart.paymentMethod}
                 </ListGroup.Item>
+
                 <ListGroup.Item>
                     <h2>Order Items</h2>
                     {cart.cartItems.length === 0 ? (
