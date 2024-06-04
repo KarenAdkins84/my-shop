@@ -89,7 +89,6 @@ const ProductEditScreen = () => {
             <FormContainer>
                 <h1>Edit Product</h1>
                 {loadingUpdate && <Loader />}
-                {loadingUpload && <Loader />}
 
                 {isLoading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
                     <Form onSubmit={ submitHandler }>
@@ -117,9 +116,9 @@ const ProductEditScreen = () => {
                             <Form.Label>Image</Form.Label>
                             <Form.Control
                                 type='text'
-                                placeholder='Enter image'
+                                placeholder='Enter image url'
                                 value={image}
-                                onChange={(e) => setImage(e.target.value)}
+                                onChange={(e) => setImage}
                             ></Form.Control>
                             <Form.Control 
                             type='file' 
@@ -127,6 +126,7 @@ const ProductEditScreen = () => {
                             onChange={uploadFileHandler}
                             ></Form.Control>
                         </Form.Group>
+                        {loadingUpload && <Loader />}
 
                         <Form.Group controlId='brand' className='my-2'>
                             <Form.Label>Brand</Form.Label>
