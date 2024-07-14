@@ -9,11 +9,11 @@ An eCommerce platform built with the MERN stack and Redux. It has an admin dashb
 * [Deployed Application](#deployed-application)
 * [Features](#features)
 * [Usage](#usage)
-  *[Env Variables](#env-variables)
-  *[Install Dependencies](#install-dependencies)
-  *[Run](#run)
-*[Build & Deploy](#build-&-deploy)
-  *[Seed Database](#seed-database)
+  **[Env Variables](#env-variables)
+  **[Install Dependencies](#install-dependencies)
+  **[Run](#run)
+  **[Build & Deploy](#build-&-deploy)
+  **[Seed Database](#seed-database)
 * [Credits](#credits)
 
 
