@@ -1,10 +1,10 @@
 # MyProShop
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## Description
+# Description
 An eCommerce platform built with the MERN stack and Redux. It has an admin dashboard that allows you to manage products, orders, and users. It also has a payment gateway that allows you to process payments with Paypal & credit/debit cards. Uses a MongoDB database and a React frontend.
 
-## Table of Contents
+# Table of Contents
 * [Screenshots](#screenshots)
 * [Deployed Application](#deployed-application)
 * [Features](#features)
@@ -17,7 +17,7 @@ An eCommerce platform built with the MERN stack and Redux. It has an admin dashb
 * [Credits](#credits)
 
 
-## Screenshots
+# Screenshots
 ![Screenshot](./uploads/ss1.png)
 ![Screenshot](./uploads/ss2.png)
 ![Screenshot](./uploads/ss3.png)
@@ -28,13 +28,13 @@ An eCommerce platform built with the MERN stack and Redux. It has an admin dashb
 ![Screenshot](./uploads/ss8.png)
 ![Screenshot](./uploads/ss9.png)
 
-## Deployed Application
+# Deployed Application
 https://myproshop-m5hp.onrender.com/
 
-## Features
-Full featured shopping cart
-Product reviews and ratings
-Top products carousel
+# Features
+*Full featured shopping cart
+*Product reviews and ratings
+*Top products carousel
 Product pagination
 Product search feature
 User profile with orders
@@ -46,7 +46,7 @@ Checkout process (shipping, payment method, etc)
 PayPal / credit card integration
 Database seeder (products & users)
 
-## Usage
+# Usage
 Create a MongoDB database and obtain your MongoDB URI @ https://www.mongodb.com
 Create a PayPal account and obtain your Client ID @ PayPal Developer https://developer.paypal.com/docs/integration/paypal-onboarding/ 
 
