@@ -18,15 +18,15 @@ An eCommerce platform built with the MERN stack and Redux. It has an admin dashb
 
 
 ## Screenshots
-![Screenshot](frontend\src\assets\ss1.png)
-![Screenshot](frontend\src\assets\ss2.png)
-![Screenshot](frontend\src\assets\ss3.png)
-![Screenshot](frontend\src\assets\ss4.png)
-![Screenshot](frontend\src\assets\ss5.png)
-![Screenshot](frontend\src\assets\ss6.png)
-![Screenshot](frontend\src\assets\ss7.png)
-![Screenshot](frontend\src\assets\ss8.png)
-![Screenshot](frontend\src\assets\ss9.png)
+![Screenshot](./uploads/ss1.png)
+![Screenshot](./uploads/ss2.png)
+![Screenshot](./uploads/ss3.png)
+![Screenshot](./uploads/ss4.png)
+![Screenshot](./uploads/ss5.png)
+![Screenshot](./uploads/ss6.png)
+![Screenshot](./uploads/ss7.png)
+![Screenshot](./uploads/ss8.png)
+![Screenshot](./uploads/ss9.png)
 
 ## Deployed Application
 https://myproshop-m5hp.onrender.com/
