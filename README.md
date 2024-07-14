@@ -68,24 +68,24 @@ Change the JWT_SECRET and PAGINATION_LIMIT to what you want
 
 ### Run
 
-Run frontend (:3000) & backend (:5000)
+Run frontend (:3000) & backend (:5000)=
 npm run dev
 
-Run backend only
+Run backend only=
 npm run server
 
 ### Build & Deploy
-Create frontend prod build
-cd frontend
-npm run build
+Create frontend production build :
+1.  cd frontend
+2.  npm run build
 
 ### Seed Database
 You can use the following commands to seed the database with some sample users and products as well as destroy all data
 
-Import data
+Import data = 
 npm run data:import
 
-Destroy data
+Destroy data = 
 npm run data:destroy
 
 Sample User Logins
@@ -100,5 +100,5 @@ jane@email.com (Customer)
 123456
 
 ## Credits
-Karen Adkins, Full-Stack Developer
-MERN Stack from Scratch | eCommerce Platform course by Brad Traversy. This course can be found on Udemy and Traversy Media.
+Karen Adkins, Full-Stack Developer ||
+MERN Stack from Scratch, eCommerce course by Brad Traversy. This course can be found on Udemy and Traversy Media.
